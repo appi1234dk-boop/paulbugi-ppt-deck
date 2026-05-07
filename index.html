@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paul's Decks — 발표자료 모음</title>
+  <meta name="description" content="Paul이 제작한 발표자료 모음. 클릭하면 슬라이드를 바로 볼 수 있습니다.">
+  <meta property="og:title" content="Paul's Decks">
+  <meta property="og:description" content="발표자료 포트폴리오">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0a0a0a;
+      --bg-card: #141414;
+      --bg-card-hover: #1c1c1c;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(255, 255, 255, 0.18);
+      --text: rgba(255, 255, 255, 0.95);
+      --text-muted: rgba(255, 255, 255, 0.55);
+      --text-subtle: rgba(255, 255, 255, 0.35);
+      --accent: #007AFF;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      letter-spacing: -0.01em;
+    }
+
+    body {
+      background:
+        radial-gradient(ellipse 800px 600px at 15% 0%, rgba(0, 122, 255, 0.08), transparent 60%),
+        radial-gradient(ellipse 700px 500px at 85% 100%, rgba(140, 80, 255, 0.06), transparent 60%),
+        var(--bg);
+      min-height: 100vh;
+    }
+
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 88px 32px 120px;
+    }
+
+    /* HEADER */
+    header {
+      margin-bottom: 72px;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 18px;
+    }
+    .eyebrow::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 12px rgba(0, 122, 255, 0.6);
+    }
+    h1 {
+      font-size: clamp(40px, 6vw, 64px);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+      margin-bottom: 18px;
+    }
+    .lede {
+      font-size: clamp(16px, 1.6vw, 19px);
+      font-weight: 400;
+      color: var(--text-muted);
+      line-height: 1.55;
+      max-width: 640px;
+    }
+
+    /* GRID */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 20px;
+    }
+
+    /* CARD */
+    .card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 32px 32px 28px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      text-decoration: none;
+      color: inherit;
+      overflow: hidden;
+      transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+      min-height: 280px;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+    }
+    .card:hover::before { opacity: 1; }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 28px;
+    }
+    .tag {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 5px 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+    }
+    .date {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text-subtle);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .card h2 {
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .card p {
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--text-muted);
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+    .stat {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .stat strong {
+      color: var(--text);
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+    }
+    .arrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: color 0.25s ease, gap 0.25s ease;
+    }
+    .card:hover .arrow {
+      color: var(--accent);
+      gap: 10px;
+    }
+    .arrow svg {
+      width: 14px; height: 14px;
+      transition: transform 0.25s ease;
+    }
+    .card:hover .arrow svg { transform: translateX(2px); }
+
+    /* FOOTER */
+    footer {
+      margin-top: 96px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--text-subtle);
+    }
+    footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    footer a:hover { color: var(--text); }
+
+    @media (max-width: 640px) {
+      .wrap { padding: 56px 20px 80px; }
+      header { margin-bottom: 48px; }
+      .grid { grid-template-columns: 1fr; gap: 14px; }
+      .card { padding: 24px 22px 22px; min-height: 240px; }
+      .card h2 { font-size: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="eyebrow">Paul's Decks</div>
+      <h1>발표자료 모음 w. AI</h1>
+      <p class="lede">AI와 함께 만든 피피티 슬라이드 자료 모음집</p>
+    </header>
+
+    <main class="grid">
+      <a class="card" href="/levelup_diary_intro">
+        <div class="card-meta">
+          <span class="tag">Product</span>
+          <span class="date">2026.04.28</span>
+        </div>
+        <h2>대화로 작성하는 성장형 일기 — Levelup Diary</h2>
+        <p>독서챌린지 5개월의 데이터가 알려준 것 — 진짜 시장은 '결과물이 보이는 자기계발'이다. 일기 서비스계의 인바디를 만들고 있는 이유.</p>
+        <div class="card-footer">
+          <div class="stat"><strong>11</strong> 슬라이드</div>
+          <div class="arrow">
+            발표 보기
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 8h10M9 4l4 4-4 4"/>
+            </svg>
+          </div>
+        </div>
+      </a>
+
+      <a class="card" href="/ddalkak_youtuber">
+        <div class="card-meta">
+          <span class="tag">Automation</span>
+          <span class="date">2026.04.10</span>
+        </div>
+        <h2>딸깍, 영상으로 유튜버 되기</h2>
+        <p>버튼 한 번에 영상이 만들어진다면? AI 자동화 파이프라인으로 매일 콘텐츠를 발행하는 1인 유튜버 워크플로우.</p>
+        <div class="card-footer">
+          <div class="stat"><strong>슬라이드</strong> 발표</div>
+          <div class="arrow">
+            발표 보기
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 8h10M9 4l4 4-4 4"/>
+            </svg>
+          </div>
+        </div>
+      </a>
+    </main>
+
+    <footer>
+      <div>© 2026 Paul. Built with Claude Code.</div>
+      <div>← / → 키로 슬라이드 이동, F로 풀스크린</div>
+    </footer>
+  </div>
+</body>
+</html>
